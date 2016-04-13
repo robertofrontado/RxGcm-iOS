@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D2C89965B64177AFB4F3D1F25D7B4923437F136F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "D2C89965B64177AFB4F3D1F25D7B4923437F136F" : 0,
+    "89FA9BBFD85851EEDF13A4E9D6BC2A9BAA280ECB" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C08C5AC6-1D36-4C66-AEAE-F335C8207B57",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "D2C89965B64177AFB4F3D1F25D7B4923437F136F" : "RxGcm-Swift\/",
+    "89FA9BBFD85851EEDF13A4E9D6BC2A9BAA280ECB" : "FishApp-iOS\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Example",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Examples\/Example\/Example.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/gitlab.com\/refineriaweb\/app_fish_ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "89FA9BBFD85851EEDF13A4E9D6BC2A9BAA280ECB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/gitlab.com\/refineriaweb\/RxGcm_swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D2C89965B64177AFB4F3D1F25D7B4923437F136F"
+    }
+  ]
+}
