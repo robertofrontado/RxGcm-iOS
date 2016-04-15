@@ -12,7 +12,6 @@ Add RxGcm pod and Google/CloudMessaging pod to the podfile
 
 ```swift
 pod 'RxGcm'
-pod 'Google/CloudMessaging'
 ```
 
 There is, thought, one step behind which RxGcm can't do for you. You need to create a [google-services.json](https://developers.google.com/cloud-messaging/ios/client) configuration file and place it in your iOS application. (You can create and download it from [here](https://developers.google.com/mobile/add?platform=android&cntapi=gcm&cnturl=https:%2F%2Fdevelopers.google.com%2Fcloud-messaging%2Fandroid%2Fclient&cntlbl=Continue%20Adding%20GCM%20Support&%3Fconfigured%3Dtrue))

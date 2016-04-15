@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1CCE899A1CB281E1000BB46B /* RxGcm_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CCE89991CB281E1000BB46B /* RxGcm_swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1CCE89A11CB281E1000BB46B /* RxGcm_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CCE89961CB281E1000BB46B /* RxGcm_swift.framework */; };
-		A2CCB10F1CBEC50A0054EAE3 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2CCB10E1CBEC50A0054EAE3 /* RxSwift.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A2CF0C991CB6C0B20097154F /* RxMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF0C981CB6C0B20097154F /* RxMessage.swift */; };
 		A2E9840D1CB41A140023BE1B /* GcmReceiverData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E984001CB41A140023BE1B /* GcmReceiverData.swift */; };
 		A2E9840E1CB41A140023BE1B /* GcmReceiverUIBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E984011CB41A140023BE1B /* GcmReceiverUIBackground.swift */; };
@@ -89,7 +88,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2CCB10F1CBEC50A0054EAE3 /* RxSwift.framework in Frameworks */,
 				BD502698BADD94456602043F /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
