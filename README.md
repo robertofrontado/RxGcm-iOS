@@ -8,10 +8,13 @@ RxSwift extension for Gcm which acts as an architectural approach to easily sati
 * Deploy a targeting strategy to aim for the desired ViewController when receiving notifications.
 
 ## Setup
-Add RxGcm pod and Google/CloudMessaging pod to the podfile
+Due to a limitation with Google/CloudMessaging it is not in cocoapods yet, 
+
+So to use this you need to add the Sources folder to your project, add this dependencies to your podfile
 
 ```swift
-pod 'RxGcm'
+pod 'Google/CloudMessaging'
+pod 'RxSwift', '~> 2.0.0'
 ```
 
 There is, thought, one step behind which RxGcm can't do for you. You need to create a [google-services.json](https://developers.google.com/cloud-messaging/ios/client) configuration file and place it in your iOS application. (You can create and download it from [here](https://developers.google.com/mobile/add?platform=android&cntapi=gcm&cnturl=https:%2F%2Fdevelopers.google.com%2Fcloud-messaging%2Fandroid%2Fclient&cntlbl=Continue%20Adding%20GCM%20Support&%3Fconfigured%3Dtrue))
