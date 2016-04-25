@@ -1,21 +1,28 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D2C89965B64177AFB4F3D1F25D7B4923437F136F",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B5396C5D719C6F462C1C66CE2C4244D07A7F97A6",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "D2C89965B64177AFB4F3D1F25D7B4923437F136F" : 0,
+    "B5396C5D719C6F462C1C66CE2C4244D07A7F97A6" : 0,
     "CA52E20C8E62753202B24B53EB375287C2C4C09B" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D5338884-8D5E-46FA-8D40-5458733BEBC6",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "D2C89965B64177AFB4F3D1F25D7B4923437F136F" : "RxGcm-Swift\/",
+    "B5396C5D719C6F462C1C66CE2C4244D07A7F97A6" : "RxGcm-iOS\/",
     "CA52E20C8E62753202B24B53EB375287C2C4C09B" : "PassApp-iOS\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "RxGcm_swift",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "iOS\/RxGcm_swift.xcworkspace",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/FuckBoilerplate\/RxGcm-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B5396C5D719C6F462C1C66CE2C4244D07A7F97A6"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/bemobile\/passapp_ios.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",

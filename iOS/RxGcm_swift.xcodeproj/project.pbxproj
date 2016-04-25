@@ -31,7 +31,7 @@
 		A2F672AD1CB69B5400628887 /* AppDelegate+RxGcmLifeCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F672AC1CB69B5400628887 /* AppDelegate+RxGcmLifeCycle.swift */; };
 		A2F672AF1CB69C9400628887 /* UIViewController+RegisterAsGcmReceiversUIForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F672AE1CB69C9400628887 /* UIViewController+RegisterAsGcmReceiversUIForeground.swift */; };
 		A2F672B71CB6A9D600628887 /* Array+RemoveObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F672B61CB6A9D600628887 /* Array+RemoveObject.swift */; };
-		BD502698BADD94456602043F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3902D924B1EBB6CA6953B77F /* Pods.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		BD502698BADD94456602043F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3902D924B1EBB6CA6953B77F /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		FE9E3881B6B2D1D18855F534 /* Pods_RxGcm_swiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B5DFB2774A26E3DE95D650 /* Pods_RxGcm_swiftTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 

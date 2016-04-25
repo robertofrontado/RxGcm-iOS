@@ -7,21 +7,22 @@
 //
 
 import UIKit
+import Foundation
 
 extension UIViewController {
     
     override public class func initialize() {
-        
-        struct Static {
-            static var token: dispatch_once_t = 0
-        }
         
         // make sure this isn't a subclass
         if self !== UIViewController.self {
             return
         }
         
-         dispatch_once(&Static.token) {
+        struct Static {
+            static var token: dispatch_once_t = 0
+        }
+        
+        dispatch_once(&Static.token) {
             // Change methods implementations
             changeMethodImplementation(
                 "viewWillAppear:",
@@ -54,17 +55,18 @@ extension UIViewController {
     }
     
     // MARK: - New Methods Implementations
-    
     func rxgcm_viewWillAppear(animated: Bool) {
-        print("rxgcm_viewWillAppear")
         self.rxgcm_viewWillAppear(animated)
-        GetGcmReceiversUIForeground.presentedViewControllers.append(self)
+        if self is GcmReceiverUIForeground {
+            GetGcmReceiversUIForeground.presentedViewControllers.append(self)
+        }
     }
     
     func rxgcm_viewWillDisappear(animated: Bool) {
-        print("rxgcm_viewWillDisappear")
         self.rxgcm_viewWillDisappear(animated)
-        GetGcmReceiversUIForeground.presentedViewControllers.removeObject(self)
+        if self is GcmReceiverUIForeground {
+            GetGcmReceiversUIForeground.presentedViewControllers.removeObject(self)
+        }
     }
     
 }

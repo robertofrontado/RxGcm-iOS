@@ -1,3 +1,5 @@
+
+
 Pod::Spec.new do |s|
   s.name         = "RxGcm"
   s.version      = "0.0.1"
@@ -16,7 +18,7 @@ Pod::Spec.new do |s|
   s.source_files = 'Sources/**/*'
 
   # s.public_header_files = 'Sources/**/*.h'
-
+  
   s.dependency 'RxSwift', '~> 2.0.0'
   s.dependency 'Google/CloudMessaging'
   
