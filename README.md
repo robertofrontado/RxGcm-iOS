@@ -108,8 +108,8 @@ class IssuesViewController: UIViewController, GcmReceiverUIForeground {
         }
     }
     
-    func target() -> String {
-        return "issues"
+    func matchesTarget(key: String) -> Bool {
+            return "issues" == key
     }
 }
 ```
@@ -129,8 +129,9 @@ class SuppliesViewController: UIViewController, GcmReceiverUIForeground {
         }
     }
     
-    func target() -> String {
-        return "supplies"
+    
+    func matchesTarget(key: String) -> Bool {
+            return "suplies" == key
     }
 }
 ```
