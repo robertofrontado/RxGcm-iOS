@@ -11,9 +11,11 @@ import RxSwift
 
 class SecondViewController: UIViewController, GcmReceiverUIForeground {
     
+    let target = GcmNotificationType.Second.rawValue
+    
     // MARK: - Actions
     @IBAction func sendNotification(sender: UIButton) {
-        RxGcm.Notifications.onNotificationReceived([RxGcm.RX_GCM_KEY_TARGET:target()])
+        RxGcm.Notifications.onNotificationReceived([RxGcm.RX_GCM_KEY_TARGET:target])
     }
     
     @IBAction func sendMismatchNotification(sender: UIButton) {
@@ -37,8 +39,8 @@ class SecondViewController: UIViewController, GcmReceiverUIForeground {
         }
     }
     
-    func target() -> String {
-        return "2"
+    func matchesTarget(key: String) -> Bool {
+        return target == key
     }
 
 }

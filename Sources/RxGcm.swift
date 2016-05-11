@@ -1,9 +1,9 @@
- //
+//
 //  RxGcm.swift
-//  base_ios_app
+//  RxGcm
 //
 //  Created by Roberto Frontado on 2/16/16.
-//  Copyright © 2016 jaime. All rights reserved.
+//  Copyright © 2016 Roberto Frontado. All rights reserved.
 //
 
 import RxSwift
@@ -198,7 +198,7 @@ public class RxGcm: NSObject, GGLInstanceIDDelegate {
     private func subscribeToTopic() {
         if(registrationToken != nil && connectedToGCM) {
             GCMPubSub.sharedInstance().subscribeWithToken(self.registrationToken, topic: subscriptionTopic,
-                options: nil, handler: {(NSError error) -> Void in
+                options: nil, handler: {(error) -> Void in
                     if (error != nil) {
                         if error.code == 3001 {
                             print("Already subscribed to \(self.subscriptionTopic)")
@@ -221,6 +221,9 @@ public class RxGcm: NSObject, GGLInstanceIDDelegate {
     
     // MARK: - AppDelegate Methods
     public func didFinishLaunchingWithOptions(application: UIApplication, launchOptions: [NSObject: AnyObject]?) {
+        // TODO: - Remove this
+        return
+        
         var configureError:NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")

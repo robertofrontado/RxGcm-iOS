@@ -30,7 +30,7 @@ class GcmReceiverUIForegroundMock: GcmReceiverUIForeground {
         })
     }
     
-    func target() -> String {
-        return "GcmReceiverMockUI"
+    func matchesTarget(key: String) -> Bool {
+        return "GcmReceiverMockUI" == key
     }
 }

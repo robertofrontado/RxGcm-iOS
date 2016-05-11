@@ -29,7 +29,7 @@ class GetGcmReceiversUIForegroundMockWithReceivers: GetGcmReceiversUIForeground 
         for viewController in viewControllers {
             if let gcmReceiverUIForeground = viewController as? GcmReceiverUIForeground {
                 
-                let targetScreen = gcmReceiverUIForeground.target() == screenName
+                let targetScreen = gcmReceiverUIForeground.matchesTarget(screenName)
                 receiverCandidate = (gcmReceiverUIForeground: gcmReceiverUIForeground, targetScreen: targetScreen)
                 
                 if targetScreen {
@@ -78,8 +78,8 @@ class GetGcmReceiversUIForegroundMockWithReceivers: GetGcmReceiversUIForeground 
             
         }
         
-        func target() -> String {
-            return String(ViewControllerMockReceiver1.self)
+        func matchesTarget(key: String) -> Bool {
+            return String(ViewControllerMockReceiver1.self) == key
         }
     }
     
@@ -101,8 +101,8 @@ class GetGcmReceiversUIForegroundMockWithReceivers: GetGcmReceiversUIForeground 
             
         }
         
-        func target() -> String {
-            return String(ViewControllerMockReceiver2.self)
+        func matchesTarget(key: String) -> Bool {
+            return String(ViewControllerMockReceiver2.self) == key
         }
     }
     

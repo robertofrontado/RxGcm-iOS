@@ -11,9 +11,9 @@ import UIKit
 var appDelegate: UIApplicationDelegate.Type?
 
 extension UIResponder {
-    
+
     override public class func initialize() {
-        
+
         if !(self is UIApplication.Type) {
             return
         }
@@ -21,19 +21,10 @@ extension UIResponder {
         guard let bundle = NSBundle.mainBundle().infoDictionary?["CFBundleExecutable"] as? String else {
             return
         }
-        
-        var appDelegateClass: NSObject.Type!
-        
-        if let delegateClass = NSClassFromString("\(bundle).AppDelegate") as? NSObject.Type {
-            appDelegateClass = delegateClass
-        }
+        var appDelegateClass = NSClassFromString("\(bundle).AppDelegate") as! NSObject.Type
         
         if let userAppDelegateClass = appDelegate as? NSObject.Type {
             appDelegateClass = userAppDelegateClass
-        }
-        
-        if appDelegateClass == nil {
-            return
         }
         
         // Change methods implementations
@@ -75,7 +66,7 @@ extension UIResponder {
     }
     
     class func changeMethodImplementation<T: NSObject>(appDelegateClass: T.Type, originalSelector: String, rxgcmSelector: String) {
-        
+
         let originalSelector = Selector(originalSelector)
         let rxgcmSelector = Selector(rxgcmSelector)
         
@@ -145,27 +136,27 @@ extension UIResponder {
 
 // MARK: - Defaults methods implementations
 extension UIResponder {
-    
+
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
     }
-    
+
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError
         error: NSError ) {
     }
-    
+
     func application(application: UIApplication,
         didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
     }
-    
+
     func application(application: UIApplication,
         didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
         fetchCompletionHandler handler: (UIBackgroundFetchResult) -> Void) {
     }
-    
+
     func applicationDidEnterBackground(application: UIApplication) {
     }
-    
+
     func applicationDidBecomeActive(application: UIApplication) {
     }
-    
+
 }

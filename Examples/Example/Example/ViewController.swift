@@ -11,9 +11,11 @@ import RxSwift
 
 class ViewController: UIViewController, GcmReceiverUIForeground {
 
+    let target = GcmNotificationType.First.rawValue
+    
     // MARK: - Actions
     @IBAction func sendNotification(sender: UIButton) {
-        RxGcm.Notifications.onNotificationReceived([RxGcm.RX_GCM_KEY_TARGET:target()])
+        RxGcm.Notifications.onNotificationReceived([RxGcm.RX_GCM_KEY_TARGET:target])
     }
 
     // MARK: - GcmReceiverUIForeground
@@ -29,9 +31,8 @@ class ViewController: UIViewController, GcmReceiverUIForeground {
         }
     }
     
-    func target() -> String {
-        return "1"
+    func matchesTarget(key: String) -> Bool {
+        return target == key
     }
-
 }
 
