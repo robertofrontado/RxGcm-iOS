@@ -22,18 +22,18 @@ There is, thought, one step behind which RxGcm can't do for you. You need to cre
 ## Usage
 
 ### GcmReceiverData
-[GcmReceiverData](https://github.com/VictorAlbertos/RxGcm/blob/master/rx_gcm/src/main/java/rx_gcm/GcmReceiverData.java) implementation should be responsible for **updating the data models**. The `onNotification` method requires to return an instance of the `observable` supplied as argument, after applying `doOn` operator to perform the update action: 
+[GcmReceiverData](https://github.com/FuckBoilerplate/RxGcm-iOS/blob/master/Sources/GcmReceiverData.swift) implementation should be responsible for **updating the data models**. The `onNotification` method requires to return an instance of the `observable` supplied as argument, after applying `doOn` operator to perform the update action: 
 
 ```swift
 class AppGcmReceiverData: NSObject, GcmReceiverData {
 
-    func onNotification(oMessage: Observable<Message>) -> Observable<Message> {
+    func onNotification(oMessage: Observable<RxMessage>) -> Observable<RxMessage> {
         return oMessage.doOn(onNext: { message in print(message)})
     }
 }
 ```
 
-The `observable` type is an instance of [Message](https://github.com/VictorAlbertos/RxGcm/blob/master/rx_gcm/src/main/java/rx_gcm/Message.java), which holds a reference to the notification (payload) and a method called `target()`, which returns the key associated with this notification.
+The `observable` type is an instance of [RxMessage](https://github.com/FuckBoilerplate/RxGcm-iOS/blob/master/Sources/RxMessage.swift), which holds a Rreference to the notification (payload) and a method called `getTarget()`, which returns the key associated with this notification.
 
 ```swift
 class AppGcmReceiverData: NSObject, GcmReceiverData {
@@ -56,7 +56,7 @@ class AppGcmReceiverData: NSObject, GcmReceiverData {
 
 ```
 
-To RxGcm be able to return a not `nil` value when calling `target()` method, you need to add the key **rx_gcm_key_target** to the payload of the push notification:
+To RxGcm be able to return a not `nil` value when calling `getTarget()` method, you need to add the key **rx_gcm_key_target** to the payload of the push notification:
  
 ```json            
 { 
@@ -70,7 +70,7 @@ To RxGcm be able to return a not `nil` value when calling `target()` method, you
 }
 ```
 
-If **rx_gcm_key_target** is not added to the json payload, you will get a `nil` value when calling `target()` method. So, you can ignore this, but you would be missing the benefits of the targeting strategy.
+If **rx_gcm_key_target** is not added to the json payload, you will get a `nil` value when calling `getTargeth()` method. So, you can ignore this, but you would be missing the benefits of the targeting strategy.
 
 ### GcmReceiverUIBackground and GcmReceiverUIForeground
 Both of them will be called only after `GcmReceiverData` `observable` has reached `onCompleted()` state. This way it’s safe to assume that any operation related to updating the data model has been successfully achieved, and now it’s time to reflect these updates in the presentation layer. 
@@ -137,7 +137,7 @@ class SuppliesViewController: UIViewController, GcmReceiverUIForeground {
 ```
 
 ### RefreshTokenReceiver
-[GcmRefreshTokenReceiver](https://github.com/VictorAlbertos/RxGcm/blob/master/rx_gcm/src/main/java/rx_gcm/GcmRefreshTokenReceiver.java) implementation will be called when the token has been updated. As the [documentation](https://developers.google.com/android/reference/com/google/android/gms/iid/InstanceIDListenerService#onTokenRefresh) points out, the token device may need to be refreshed for some particular reason. 
+[GcmRefreshTokenReceiver](https://github.com/FuckBoilerplate/RxGcm-iOS/blob/master/Sources/GcmRefreshTokenReceiver.swift) implementation will be called when the token has been updated. As the [documentation](https://developers.google.com/cloud-messaging/ios/start) points out, the token device may need to be refreshed for some particular reason. 
 
 ```java
 class AppGcmRefreshTokenReceiver: NSObject, GcmRefreshTokenReceiver {
@@ -150,7 +150,7 @@ class AppGcmRefreshTokenReceiver: NSObject, GcmRefreshTokenReceiver {
 ```
  
 ### Retrieving current token 
-If at some point you need to retrieve the gcm token device -e.g for updating the value on your server, you could do it easily calling [RxGcm.Notifications.currentToken](https://github.com/VictorAlbertos/RxGcm/blob/master/rx_gcm/src/main/java/rx_gcm/internal/RxGcm.java#L114):
+If at some point you need to retrieve the gcm token device -e.g for updating the value on your server, you could do it easily calling [RxGcm.Notifications.currentToken](https://github.com/FuckBoilerplate/RxGcm-iOS/blob/master/Sources/RxGcm.swift#L83):
 
 ```swift
     RxGcm.Notifications.currentToken().subscribe(
@@ -160,7 +160,7 @@ If at some point you need to retrieve the gcm token device -e.g for updating the
 ```
 
 ### Register RxGcm classes
-Once you have implemented `GcmReceiverData` and `GcmReceiverUIBackground` interfaces is time to register them in your iOS `AppDelegate` class calling [RxGcm.Notifications.register](https://github.com/VictorAlbertos/RxGcm/blob/master/rx_gcm/src/main/java/rx_gcm/internal/RxGcm.java#L79). Plus, register `RefreshTokenReceiver` implementation too at this point. 
+Once you have implemented `GcmReceiverData` and `GcmReceiverUIBackground` interfaces is time to register them in your iOS `AppDelegate` class calling [RxGcm.Notifications.register](https://github.com/FuckBoilerplate/RxGcm-iOS/blob/master/Sources/RxGcm.swift#L55). Plus, register `RefreshTokenReceiver` implementation too at this point. 
    
 ```swift
 @UIApplicationMain
@@ -204,7 +204,7 @@ RxGcm uses internally [RxSwift](https://github.com/ReactiveX/RxSwift). Thanks to
 This means you do not need to worry about threading and sync. But if you need to change this behaviour, you can do it easily setting in which scheduler the observable needs to observe and subscribe.
 
 ## Examples
-There is a complete example of RxGcm in the [app module](https://github.com/VictorAlbertos/RxGcm/tree/master/app). Plus, it has an integration test
+There is a complete example of RxGcm in the [app module](https://github.com/FuckBoilerplate/RxGcm-iOS/tree/master/Examples/Example). Plus, it has an integration test
 
 ## Testing notification
 You can easily [send http post request](https://developers.google.com/cloud-messaging/downstream) to Google Cloud Messaging server using Postman or Advanced Rest Client.
