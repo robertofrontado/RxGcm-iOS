@@ -212,9 +212,12 @@ Or you can send directly push notifications using [this page](http://1-dot-sigma
 
 ## Author
 **Roberto Frontado**
-* <https://twitter.com/robertofrontado>
 * <https://linkedin.com/in/robertofrontado>
 * <https://github.com/robertofrontado>
+* <https://twitter.com/robertofrontado>
 
-## More interesting libraries using Rx technology:
-TDB
+# Another author's libraris using RxSwift:
+
+ - [BaseApp-iOS](https://github.com/FuckBoilerplate/base_app_ios): Base skeleton structure to start every new iOS project
+ - [OkDataSources](https://github.com/FuckBoilerplate/OkDataSources): Wrappers for iOS TableView and CollectionView DataSources to simplify its api at a minimum. Also it has a cool PagerView and SlidingTabs!
+ - [RxSocialConnect-iOS](https://github.com/FuckBoilerplate/RxSocialConnect-iOS): OAuth RxSwift extension for iOS.
