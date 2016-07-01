@@ -73,8 +73,9 @@ public class RxGcm: NSObject, GGLInstanceIDDelegate {
             observable.onCompleted()
             return NopDisposable.instance
             }.subscribeOn(backgroundThreadScheduler)
-        .observeOn(mainThreadScheduler)
-        // TODO: - Add retryWhen
+            .delaySubscription(3, scheduler: backgroundThreadScheduler)
+            .retry(3)
+            .observeOn(mainThreadScheduler)
     }
     
     /**
@@ -90,8 +91,6 @@ public class RxGcm: NSObject, GGLInstanceIDDelegate {
             observable.onCompleted()
             return NopDisposable.instance
         }).subscribeOn(backgroundThreadScheduler)
-            .delaySubscription(3, scheduler: backgroundThreadScheduler)
-            .retry(3)
             .observeOn(mainThreadScheduler)
     }
     /**

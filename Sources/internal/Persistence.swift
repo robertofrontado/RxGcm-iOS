@@ -41,6 +41,7 @@ class Persistence {
     func saveToken(token: String) {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         userDefaults.setValue(token, forKey: Constants.KEY_USER_DEFAULTS_TOKEN)
+        userDefaults.synchronize()
     }
     
     func getToken() -> String? {
