@@ -28,8 +28,8 @@ public class RxGcm: NSObject, GGLInstanceIDDelegate {
     
     private var persistence: Persistence!
     private var getGcmReceiversUIForeground: GetGcmReceiversUIForeground!
-    private var mainThreadScheduler: ImmediateSchedulerType!
-    private var backgroundThreadScheduler: ImmediateSchedulerType!
+    private var mainThreadScheduler: SchedulerType!
+    private var backgroundThreadScheduler: SchedulerType!
     private var testing: Bool = false
     
     func initForTesting(onBackground: Bool, registrationToken: String?, persistence: Persistence, getGcmReceiversUIForeground: GetGcmReceiversUIForeground) {
@@ -90,8 +90,9 @@ public class RxGcm: NSObject, GGLInstanceIDDelegate {
             observable.onCompleted()
             return NopDisposable.instance
         }).subscribeOn(backgroundThreadScheduler)
-        .observeOn(mainThreadScheduler)
-            // TODO: - Add retryWhen
+            .delaySubscription(3, scheduler: backgroundThreadScheduler)
+            .retry(3)
+            .observeOn(mainThreadScheduler)
     }
     /**
     * @param aClass The class which implements GcmRefreshTokenReceiver and so the class which will be notified when a token refresh happens.
@@ -236,7 +237,10 @@ public class RxGcm: NSObject, GGLInstanceIDDelegate {
         // TODO: - Implement receiver delegate!!!
 //        gcmConfig.receiverDelegate = appGCMReceiverDelegate
         GCMService.sharedInstance().startWithConfig(gcmConfig)
+        
+        
     }
+    
     
     public func didRegisterForRemoteNotificationsWithDeviceToken(application: UIApplication, deviceToken: NSData) {
         print("Did register for remote notification with device toke: \(deviceToken)")
@@ -244,9 +248,9 @@ public class RxGcm: NSObject, GGLInstanceIDDelegate {
         instanceIDConfig.delegate = self
         GGLInstanceID.sharedInstance().startWithConfig(instanceIDConfig)
         registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken,
-            kGGLInstanceIDAPNSServerTypeSandboxOption:true]
+                               kGGLInstanceIDAPNSServerTypeSandboxOption:true]
         GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(gcmSenderID,
-            scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
+                                                                 scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
     }
     
     public func didFailToRegisterForRemoteNotificationsWithError(application: UIApplication, error: NSError ) {
@@ -259,18 +263,37 @@ public class RxGcm: NSObject, GGLInstanceIDDelegate {
     }
     
     public func didReceiveRemoteNotification(application: UIApplication,
-        userInfo: [NSObject : AnyObject],
-        fetchCompletionHandler handler: (UIBackgroundFetchResult) -> Void) {
-            GCMService.sharedInstance().appDidReceiveMessage(userInfo)
-            onNotificationReceived(userInfo)
+                                             userInfo: [NSObject : AnyObject],
+                                             fetchCompletionHandler handler: (UIBackgroundFetchResult) -> Void) {
+        GCMService.sharedInstance().appDidReceiveMessage(userInfo)
+        onNotificationReceived(userInfo)
+        handler(UIBackgroundFetchResult.NoData)
     }
     
     public func applicationDidEnterBackground(application: UIApplication) {
         onBackground = true
+        
+        GCMService.sharedInstance().disconnect()
+        connectedToGCM = false
     }
     
     public func applicationDidBecomeActive(application: UIApplication) {
+        application.applicationIconBadgeNumber = 0
+        
         onBackground = false
+        
+        // Connect to the GCM server to receive non-APNS notifications
+        GCMService.sharedInstance().connectWithHandler({(error:NSError?) -> Void in
+            if let error = error {
+                print("Could not connect to GCM: \(error.localizedDescription)")
+            } else {
+                self.connectedToGCM = true
+                print("Connected to GCM")
+                // [START_EXCLUDE]
+                self.subscribeToTopic()
+                // [END_EXCLUDE]
+            }
+        })
     }
 }
 
