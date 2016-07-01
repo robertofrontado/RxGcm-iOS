@@ -124,14 +124,15 @@ public class RxGcm: NSObject, GGLInstanceIDDelegate {
         let oMessage = Observable.just(RxMessage(from: from, payload: data, target: target))
         if let className = persistence.getClassNameGcmReceiver() {
             let gcmReceiverData: GcmReceiverData = getInstanceClassByName(className)
+            
             gcmReceiverData.onNotification(oMessage)
-                .doOn(onNext: { (message) -> Void in
+                .subscribeNext  { message in
                     if self.isAppOnBackground() {
                         self.notifyGcmReceiverBackgroundMessage(message)
                     } else {
                         self.notifyGcmReceiverForegroundMessage(message)
                     }
-                }).subscribe()
+            }
         }
     }
 
@@ -140,29 +141,23 @@ public class RxGcm: NSObject, GGLInstanceIDDelegate {
         if let className = persistence.getClassNameGcmReceiverUIBackground() {
             let gcmReceiverUIBackground: GcmReceiverUIBackground = getInstanceClassByName(className)
             
-            Observable.just(message).observeOn(mainThreadScheduler)
-                .subscribe(onNext: { (message) -> Void in
-                    let oNotification = Observable.just(message)
-                    gcmReceiverUIBackground.onNotification(oNotification)
-                })
+            let oNotification = Observable.just(message).observeOn(mainThreadScheduler)
+            gcmReceiverUIBackground.onNotification(oNotification)
         }
     }
     
     private func notifyGcmReceiverForegroundMessage(message: RxMessage) {
         
         if let wrapperGcmReceiverUIForeground = getGcmReceiversUIForeground.retrieve(message.getTarget()) {
+            
+            let oNotification = Observable.just(message).observeOn(mainThreadScheduler)
+            
             if wrapperGcmReceiverUIForeground.targetScreen {
-                Observable.just(message).observeOn(mainThreadScheduler)
-                    .subscribeNext({ (message) -> Void in
-                        wrapperGcmReceiverUIForeground.gcmReceiverUIForeground
-                            .onTargetNotification(Observable.just(message))
-                    })
+                wrapperGcmReceiverUIForeground.gcmReceiverUIForeground
+                    .onTargetNotification(oNotification)
             } else {
-                Observable.just(message).observeOn(mainThreadScheduler)
-                    .subscribeNext({ (message) -> Void in
-                        wrapperGcmReceiverUIForeground.gcmReceiverUIForeground
-                            .onMismatchTargetNotification(Observable.just(message))
-                    })
+                wrapperGcmReceiverUIForeground.gcmReceiverUIForeground
+                    .onMismatchTargetNotification(oNotification)
             }
         }
     }
