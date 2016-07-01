@@ -173,6 +173,7 @@ public class RxGcm: NSObject, GGLInstanceIDDelegate {
             // Limitation
             bundle = "\(bundle)Tests"
         }
+        bundle = bundle.stringByReplacingOccurrencesOfString(" ", withString: "_")
         let classInst = getClassByName("\(bundle).\(className)") as! NSObject.Type
         instance = classInst.init()
         return instance as! T
