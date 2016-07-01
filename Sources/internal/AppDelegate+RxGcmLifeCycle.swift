@@ -18,9 +18,10 @@ extension UIResponder {
             return
         }
         
-        guard let bundle = NSBundle.mainBundle().infoDictionary?["CFBundleExecutable"] as? String else {
+        guard var bundle = NSBundle.mainBundle().infoDictionary?["CFBundleExecutable"] as? String else {
             return
         }
+        bundle = bundle.stringByReplacingOccurrencesOfString(" ", withString: "_")
         var appDelegateClass = NSClassFromString("\(bundle).AppDelegate") as! NSObject.Type
         
         if let userAppDelegateClass = appDelegate as? NSObject.Type {
