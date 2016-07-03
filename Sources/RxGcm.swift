@@ -181,10 +181,11 @@ public class RxGcm: NSObject, GGLInstanceIDDelegate {
     // MARK: - GCM Methods
     private func registrationHandler(registrationToken: String!, error: NSError!) {
         if (registrationToken != nil) {
-            self.registrationToken = registrationToken
             print("Registration Token: \(registrationToken)")
-            self.subscribeToTopic()
-            self.onTokenRefreshed()
+            self.registrationToken = registrationToken
+            persistence.saveToken(registrationToken)
+            subscribeToTopic()
+            onTokenRefreshed()
         } else {
             print("Registration to GCM failed with error: \(error.localizedDescription)")
         }
