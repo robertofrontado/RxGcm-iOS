@@ -32,7 +32,7 @@ class RxGcm_swiftTests: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }
@@ -43,11 +43,11 @@ class RxGcm_swiftTests: XCTestCase {
         
         var success = false
         RxGcm.Notifications.register(GcmReceiverDataMock.self, gcmReceiverUIBackgroundClass: GcmReceiverUIBackgroundMock.self)
-            .subscribeNext { (token) -> Void in
+            .subscribe(onNext: { (token) -> Void in
                 success = true
                 expect(token).to(equal(self.tokenMock))
-        }
-        expect(success).toEventually(equal(true))
+        })
+        expect(success).toEventually(beTrue(), timeout: 10, pollInterval: 1, description: nil)
     }
     
     // When_No_Saved_Token_And_Call_GcmServer_Error_Emit_Error_But_Try_3_Times
@@ -63,7 +63,7 @@ class RxGcm_swiftTests: XCTestCase {
                 }, onCompleted: { () -> Void in
                     success = true
             })
-        expect(success).toEventually(equal(true))
+        expect(success).toEventually(beTrue(), timeout: 10, pollInterval: 1, description: nil)
     }
 
     func testWhenCallCurrentTokenAndThereIsATokenEmitIt() {
@@ -72,9 +72,9 @@ class RxGcm_swiftTests: XCTestCase {
         
         var success = false
         RxGcm.Notifications.currentToken()
-            .subscribeNext { (token) -> Void in
+            .subscribe(onNext: { (token) -> Void in
                 success = true
-        }
+        })
         
         expect(success).toEventually(equal(true))
     }
@@ -88,7 +88,7 @@ class RxGcm_swiftTests: XCTestCase {
         GcmRefreshTokenReceiverMock.reset()
         RxGcm.Notifications.initForTesting(false, registrationToken: tokenMock, persistence: PersistenceMock(tokenMock: tokenMock), getGcmReceiversUIForeground: GetGcmReceiversUIForegroundMock())
         RxGcm.Notifications.onTokenRefreshed()
-        expect(GcmRefreshTokenReceiverMock.tokenUpdate).toEventually(beTruthy())
+        expect(GcmRefreshTokenReceiverMock.tokenUpdate).toNotEventually(beNil())
         expect(GcmRefreshTokenReceiverMock.tokenUpdate.getToken()).to(equal(tokenMock))
     
         GcmRefreshTokenReceiverMock.reset()
@@ -105,7 +105,13 @@ class RxGcm_swiftTests: XCTestCase {
         
         RxGcm.Notifications.initForTesting(true, registrationToken: tokenMock, persistence: PersistenceMock(tokenMock: tokenMock), getGcmReceiversUIForeground: GetGcmReceiversUIForegroundMock())
         
-        RxGcm.Notifications.register(GcmReceiverDataMock.self, gcmReceiverUIBackgroundClass: GcmReceiverUIBackgroundMock.self).subscribe()
+        var success = false
+        RxGcm.Notifications.register(GcmReceiverDataMock.self, gcmReceiverUIBackgroundClass: GcmReceiverUIBackgroundMock.self)
+            .subscribe(onCompleted: {
+                success = true
+            })
+        
+        expect(success).toEventually(beTrue(), timeout: 10, pollInterval: 1, description: nil)
         
         let from1 = "MockServer1"
         RxGcm.Notifications.onNotificationReceived([RxGcm.RX_GCM_KEY_FROM: from1])

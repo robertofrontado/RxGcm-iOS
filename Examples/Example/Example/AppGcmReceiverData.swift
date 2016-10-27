@@ -10,7 +10,7 @@ import RxSwift
 
 class AppGcmReceiverData: NSObject, GcmReceiverData {
 
-    func onNotification(oMessage: Observable<RxMessage>) -> Observable<RxMessage> {
+    func onNotification(_ oMessage: Observable<RxMessage>) -> Observable<RxMessage> {
         return oMessage
     }
 }

@@ -1,11 +1,13 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
-pod 'Google/CloudMessaging'
-pod 'RxSwift', '~> 2.0.0'
+target 'RxGcm_swift' do
+    pod 'RxSwift', '~> 3.0'
+    pod 'Google/CloudMessaging'
+end
 
 target 'RxGcm_swiftTests' do
-    pod 'Nimble', '~> 3.0.0'
-    pod 'RxTests', '~> 2.0'
+    pod 'Nimble', '~> 5.0.0'
+    pod 'RxTest', '~> 3.0'
 end
