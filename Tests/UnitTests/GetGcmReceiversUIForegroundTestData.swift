@@ -13,7 +13,7 @@ import RxSwift
 
 class GetGcmReceiversUIForegroundTestData: XCTestCase {
     
-    private var getGcmReceiversUIForegroundMockWithReceivers: GetGcmReceiversUIForegroundMockWithReceivers!
+    fileprivate var getGcmReceiversUIForegroundMockWithReceivers: GetGcmReceiversUIForegroundMockWithReceivers!
     
     override func setUp() {
         super.setUp()
@@ -32,7 +32,7 @@ class GetGcmReceiversUIForegroundTestData: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }
@@ -41,14 +41,14 @@ class GetGcmReceiversUIForegroundTestData: XCTestCase {
         
         getGcmReceiversUIForegroundMockWithReceivers.testWithReceivers = true
         
-        var targetScreen = String(GetGcmReceiversUIForegroundMockWithReceivers.ViewControllerMockReceiver1.self)
+        var targetScreen = String(describing: GetGcmReceiversUIForegroundMockWithReceivers.ViewControllerMockReceiver1.self)
         var wrapper = getGcmReceiversUIForegroundMockWithReceivers.retrieve(targetScreen)!
         expect(wrapper.targetScreen).to(beTrue())
 //        expect(wrapper.gcmReceiverUIForeground)
 //            .to(beAKindOf(GetGcmReceiversUIForegroundMockWithReceivers.ViewControllerMockReceiver1.self))
         assert(wrapper.gcmReceiverUIForeground is GetGcmReceiversUIForegroundMockWithReceivers.ViewControllerMockReceiver1)
         
-        targetScreen = String(GetGcmReceiversUIForegroundMockWithReceivers.ViewControllerMockReceiver2.self)
+        targetScreen = String(describing: GetGcmReceiversUIForegroundMockWithReceivers.ViewControllerMockReceiver2.self)
         wrapper = getGcmReceiversUIForegroundMockWithReceivers.retrieve(targetScreen)!
         expect(wrapper.targetScreen).to(beTrue())
 //        expect(wrapper.gcmReceiverUIForeground)

@@ -19,8 +19,8 @@ class GcmReceiverDataMock: NSObject, GcmReceiverData {
         onNotificationStartTimeStamp = nil
     }
     
-    func onNotification(oMessage: Observable<RxMessage>) -> Observable<RxMessage> {
-        return oMessage.doOn(onNext: { (message) -> Void in
+    func onNotification(_ oMessage: Observable<RxMessage>) -> Observable<RxMessage> {
+        return oMessage.do(onNext: { (message) -> Void in
             GcmReceiverDataMock.messages.append(message)
             GcmReceiverDataMock.onNotificationStartTimeStamp = NSDate().timeIntervalSince1970
             sleep(1)

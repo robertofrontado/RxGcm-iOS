@@ -19,18 +19,18 @@ class GcmReceiverUIForegroundMock: GcmReceiverUIForeground {
         onNotificationFinishTimeStamp = nil
     }
     
-    func onTargetNotification(oMessage: Observable<RxMessage>) {
+    func onTargetNotification(_ oMessage: Observable<RxMessage>) {
         
     }
     
-    func onMismatchTargetNotification(oMessage: Observable<RxMessage>) {
-        oMessage.subscribeNext({ (message) -> Void in
+    func onMismatchTargetNotification(_ oMessage: Observable<RxMessage>) {
+        oMessage.subscribe(onNext: ({ (message) -> Void in
             GcmReceiverUIForegroundMock.messages.append(message)
             GcmReceiverUIForegroundMock.onNotificationFinishTimeStamp = NSDate().timeIntervalSince1970
-        })
+        }))
     }
     
-    func matchesTarget(key: String) -> Bool {
+    func matchesTarget(_ key: String) -> Bool {
         return "GcmReceiverMockUI" == key
     }
 }

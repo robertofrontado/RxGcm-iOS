@@ -4,20 +4,27 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "629E6ACB80F47D331A94DCC57D889C76F7F07528" : 9223372036854775807,
     "D2C89965B64177AFB4F3D1F25D7B4923437F136F" : 0,
-    "B5396C5D719C6F462C1C66CE2C4244D07A7F97A6" : 0,
-    "89FA9BBFD85851EEDF13A4E9D6BC2A9BAA280ECB" : 0
+    "89FA9BBFD85851EEDF13A4E9D6BC2A9BAA280ECB" : 0,
+    "B5396C5D719C6F462C1C66CE2C4244D07A7F97A6" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C08C5AC6-1D36-4C66-AEAE-F335C8207B57",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "629E6ACB80F47D331A94DCC57D889C76F7F07528" : "LetMeSpace%20iOS\/",
     "D2C89965B64177AFB4F3D1F25D7B4923437F136F" : "RxGcm-Swift\/",
-    "B5396C5D719C6F462C1C66CE2C4244D07A7F97A6" : "RxGcm-iOS\/",
-    "89FA9BBFD85851EEDF13A4E9D6BC2A9BAA280ECB" : "FishApp-iOS\/"
+    "89FA9BBFD85851EEDF13A4E9D6BC2A9BAA280ECB" : "FishApp-iOS\/",
+    "B5396C5D719C6F462C1C66CE2C4244D07A7F97A6" : "RxGcm-iOS\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Example",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Examples\/Example\/Example.xcworkspace",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/bemobile\/letmespace_ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "629E6ACB80F47D331A94DCC57D889C76F7F07528"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/gitlab.com\/refineriaweb\/app_fish_ios.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
