@@ -14,24 +14,24 @@ class ViewController: UIViewController, GcmReceiverUIForeground {
     let target = GcmNotificationType.First.rawValue
     
     // MARK: - Actions
-    @IBAction func sendNotification(sender: UIButton) {
+    @IBAction func sendNotification(_ sender: UIButton) {
         RxGcm.Notifications.onNotificationReceived([RxGcm.RX_GCM_KEY_TARGET:target])
     }
 
     // MARK: - GcmReceiverUIForeground
-    func onTargetNotification(oMessage: Observable<RxMessage>) {
-        oMessage.subscribeNext { (message) -> Void in
+    func onTargetNotification(_ oMessage: Observable<RxMessage>) {
+        oMessage.subscribe(onNext: { (message) -> Void in
             print("Target \(message)")
-        }
+        })
     }
     
-    func onMismatchTargetNotification(oMessage: Observable<RxMessage>) {
-        oMessage.subscribeNext { (message) -> Void in
+    func onMismatchTargetNotification(_ oMessage: Observable<RxMessage>) {
+        oMessage.subscribe(onNext: { (message) -> Void in
             print("Mismatch \(message)")
-        }
+        })
     }
     
-    func matchesTarget(key: String) -> Bool {
+    func matchesTarget(_ key: String) -> Bool {
         return target == key
     }
 }
