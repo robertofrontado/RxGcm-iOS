@@ -14,7 +14,7 @@ So to use this you need to add the Sources folder to your project, add this depe
 
 ```swift
 pod 'Google/CloudMessaging'
-pod 'RxSwift', '~> 2.0.0'
+pod 'RxSwift', '~> 3.0'
 ```
 
 There is, thought, one step behind which RxGcm can't do for you. You need to create a [google-services.json](https://developers.google.com/cloud-messaging/ios/client) configuration file and place it in your iOS application. (You can create and download it from [here](https://developers.google.com/mobile/add?platform=android&cntapi=gcm&cnturl=https:%2F%2Fdevelopers.google.com%2Fcloud-messaging%2Fandroid%2Fclient&cntlbl=Continue%20Adding%20GCM%20Support&%3Fconfigured%3Dtrue))
@@ -27,7 +27,7 @@ There is, thought, one step behind which RxGcm can't do for you. You need to cre
 ```swift
 class AppGcmReceiverData: NSObject, GcmReceiverData {
 
-    func onNotification(oMessage: Observable<RxMessage>) -> Observable<RxMessage> {
+    func onNotification(_ oMessage: Observable<RxMessage>) -> Observable<RxMessage> {
         return oMessage.doOn(onNext: { message in print(message)})
     }
 }
@@ -38,8 +38,8 @@ The `observable` type is an instance of [RxMessage](https://github.com/FuckBoile
 ```swift
 class AppGcmReceiverData: NSObject, GcmReceiverData {
 
-    func onNotification(oMessage: Observable<RxMessage>) -> Observable<RxMessage> {
-        return oMessage.doOn(onNext: { (message) -> Void in
+    func onNotification(_ oMessage: Observable<RxMessage>) -> Observable<RxMessage> {
+        return oMessage.do(onNext: { (message) -> Void in
             
             let payload = message.getPayload()
             
@@ -81,8 +81,8 @@ Both of them will be called only after `GcmReceiverData` `observable` has reache
 ```swift
 class AppGcmReceiverUIBackground: NSObject, GcmReceiverUIBackground {
 
-    func onNotification(oMessage: Observable<RxMessage>) {
-        oMessage.subscribeNext { message in buildAndShowNotification(message) }
+    func onNotification(_ oMessage: Observable<RxMessage>) {
+        oMessage.subscribe(onNext: { message in buildAndShowNotification(message) })
     }
 }
 
@@ -96,19 +96,19 @@ RxGcm internally compares this string to the value of the **rx_gcm_key_target** 
 ```swift
 class IssuesViewController: UIViewController, GcmReceiverUIForeground {
 
-    func onTargetNotification(oMessage: Observable<RxMessage>) {
-        oMessage.subscribeNext { (message) -> Void in
+    func onTargetNotification(_ oRxMessage: Observable<RxMessage>) {
+        oMessage.subscribe(onNext: { (message) -> Void in
             // Update views
-        }
+        })
     }
     
-    func onMismatchTargetNotification(oMessage: Observable<RxMessage>) {
-        oMessage.subscribeNext { (message) -> Void in
+    func onMismatchTargetNotification(_ oRxMessage: Observable<RxMessage>) {
+        oMessage.subscribe(onNext: { (message) -> Void in
             self.showAlert(message)
-        }
+        })
     }
     
-    func matchesTarget(key: String) -> Bool {
+    func matchesTarget(_ key: String) -> Bool {
             return "issues" == key
     }
 }
@@ -117,20 +117,20 @@ class IssuesViewController: UIViewController, GcmReceiverUIForeground {
 ```swift
 class SuppliesViewController: UIViewController, GcmReceiverUIForeground {
 
-    func onTargetNotification(oMessage: Observable<RxMessage>) {
-        oMessage.subscribeNext { (message) -> Void in
+    func onTargetNotification(_ oRxMessage: Observable<RxMessage>) {
+        oMessage.subscribe(onNext: { (message) -> Void in
             // Update views
-        }
+        })
     }
     
-    func onMismatchTargetNotification(oMessage: Observable<RxMessage>) {
-        oMessage.subscribeNext { (message) -> Void in
+    func onMismatchTargetNotification(_ oRxMessage: Observable<RxMessage>) {
+        oMessage.subscribe(onNext: { (message) -> Void in
             self.showAlert(message)
-        }
+        })
     }
     
     
-    func matchesTarget(key: String) -> Bool {
+    func matchesTarget(_ key: String) -> Bool {
             return "suplies" == key
     }
 }
@@ -142,7 +142,7 @@ class SuppliesViewController: UIViewController, GcmReceiverUIForeground {
 ```java
 class AppGcmRefreshTokenReceiver: NSObject, GcmRefreshTokenReceiver {
 
-    func onTokenReceive(oTokenUpdate: Observable<TokenUpdate>) {
+    func onTokenReceive(_ oTokenUpdate: Observable<TokenUpdate>) {
         oTokenUpdate.subscribe(onNext: { tokenUpdate in }
             , onError: { error in })
     }
@@ -168,12 +168,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:[UIApplicationLaunchOptionsKey:Any]?) -> Bool {
         // Override point for customization after application launch.
         RxGcm.Notifications.register(AppGcmReceiverData.self, gcmReceiverUIBackgroundClass: AppGcmReceiverUIBackground.self)
             .subscribe(
-                onNext: { token in },
-                onError: { error in  }
+                onNext: { token in print(token) },
+                onError: { error in print((error as NSError).domain) }
         )
         
         RxGcm.Notifications.onRefreshToken(AppGcmRefreshTokenReceiver.self)
