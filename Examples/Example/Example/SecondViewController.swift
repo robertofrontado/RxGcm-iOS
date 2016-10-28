@@ -14,32 +14,32 @@ class SecondViewController: UIViewController, GcmReceiverUIForeground {
     let target = GcmNotificationType.Second.rawValue
     
     // MARK: - Actions
-    @IBAction func sendNotification(sender: UIButton) {
+    @IBAction func sendNotification(_ sender: UIButton) {
         RxGcm.Notifications.onNotificationReceived([RxGcm.RX_GCM_KEY_TARGET:target])
     }
     
-    @IBAction func sendMismatchNotification(sender: UIButton) {
+    @IBAction func sendMismatchNotification(_ sender: UIButton) {
         RxGcm.Notifications.onNotificationReceived([RxGcm.RX_GCM_KEY_TARGET:"1"])
     }
     
-    @IBAction func backButtonPressed(sender: UIButton) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - GcmReceiverUIForeground
-    func onTargetNotification(oMessage: Observable<RxMessage>) {
-        oMessage.subscribeNext { (message) -> Void in
+    func onTargetNotification(_ oMessage: Observable<RxMessage>) {
+        oMessage.subscribe(onNext: { (message) -> Void in
             print("Target \(message)")
-        }
+        })
     }
     
-    func onMismatchTargetNotification(oMessage: Observable<RxMessage>) {
-        oMessage.subscribeNext { (message) -> Void in
+    func onMismatchTargetNotification(_ oMessage: Observable<RxMessage>) {
+        oMessage.subscribe(onNext: { (message) -> Void in
             print("Mismatch \(message)")
-        }
+        })
     }
     
-    func matchesTarget(key: String) -> Bool {
+    func matchesTarget(_ key: String) -> Bool {
         return target == key
     }
 

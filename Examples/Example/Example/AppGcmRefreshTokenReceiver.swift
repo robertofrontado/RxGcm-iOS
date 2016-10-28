@@ -10,9 +10,9 @@ import RxSwift
 
 class AppGcmRefreshTokenReceiver: NSObject, GcmRefreshTokenReceiver {
 
-    func onTokenReceive(oTokenUpdate: Observable<TokenUpdate>) {
-        oTokenUpdate.subscribeNext { (tokenUpdate) -> Void in
+    func onTokenReceive(_ oTokenUpdate: Observable<TokenUpdate>) {
+        oTokenUpdate.subscribe(onNext: { (tokenUpdate) -> Void in
             print("Token updated: \(tokenUpdate.getToken())")
-        }
+        })
     }
 }

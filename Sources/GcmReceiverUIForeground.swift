@@ -19,13 +19,13 @@ public protocol GcmReceiverUIForeground {
      * Called when ViewController matches with the desired target specified in the bundle notification.
      * @see GcmReceiverUIForeground
      */
-    func onTargetNotification(oMessage: Observable<RxMessage>)
+    func onTargetNotification(_ oMessage: Observable<RxMessage>)
     
     /**
      * Called when ViewController does not match with the desired target specified in the bundle notification.
      * @see GcmReceiverUIForeground
      */
-    func onMismatchTargetNotification(oMessage: Observable<RxMessage>)
+    func onMismatchTargetNotification(_ oMessage: Observable<RxMessage>)
     
     /**
      * Determines if the implementing class is interested on be notified when updating the data model or seeking for the activity/fragment to be notified.
@@ -33,5 +33,5 @@ public protocol GcmReceiverUIForeground {
      * @return true if the implementing class is interested on be notified
      
      */
-    func matchesTarget(key: String) -> Bool
+    func matchesTarget(_ key: String) -> Bool
 }
