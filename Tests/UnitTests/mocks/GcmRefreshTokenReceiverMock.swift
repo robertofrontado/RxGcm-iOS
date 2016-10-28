@@ -19,7 +19,7 @@ class GcmRefreshTokenReceiverMock: NSObject, GcmRefreshTokenReceiver {
         feedbackMessage = nil
     }
     
-    func onTokenReceive(oTokenUpdate: Observable<TokenUpdate>) {
+    func onTokenReceive(_ oTokenUpdate: Observable<TokenUpdate>) {
         oTokenUpdate.subscribe(onNext: { (tokenUpdate) -> Void in
             GcmRefreshTokenReceiverMock.tokenUpdate = tokenUpdate
             }, onError: { (error) -> Void in

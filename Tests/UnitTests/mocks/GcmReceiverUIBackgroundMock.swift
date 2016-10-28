@@ -19,10 +19,10 @@ class GcmReceiverUIBackgroundMock: NSObject, GcmReceiverUIBackground {
         onNotificationFinishTimeStamp = nil
     }
     
-    func onNotification(oMessage: Observable<RxMessage>) {
-        oMessage.subscribeNext({ (message) -> Void in
+    func onNotification(_ oMessage: Observable<RxMessage>) {
+        oMessage.subscribe(onNext: ({ (message) -> Void in
             GcmReceiverUIBackgroundMock.messages.append(message)
             GcmReceiverUIBackgroundMock.onNotificationFinishTimeStamp = NSDate().timeIntervalSince1970
-        })
+        }))
     }
 }

@@ -4,20 +4,27 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "629E6ACB80F47D331A94DCC57D889C76F7F07528" : 9223372036854775807,
     "D2C89965B64177AFB4F3D1F25D7B4923437F136F" : 0,
-    "B5396C5D719C6F462C1C66CE2C4244D07A7F97A6" : 0,
-    "CA52E20C8E62753202B24B53EB375287C2C4C09B" : 0
+    "CA52E20C8E62753202B24B53EB375287C2C4C09B" : 0,
+    "B5396C5D719C6F462C1C66CE2C4244D07A7F97A6" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D5338884-8D5E-46FA-8D40-5458733BEBC6",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "629E6ACB80F47D331A94DCC57D889C76F7F07528" : "LetMeSpace%20iOS\/",
     "D2C89965B64177AFB4F3D1F25D7B4923437F136F" : "RxGcm-Swift\/",
-    "B5396C5D719C6F462C1C66CE2C4244D07A7F97A6" : "RxGcm-iOS\/",
-    "CA52E20C8E62753202B24B53EB375287C2C4C09B" : "PassApp-iOS\/"
+    "CA52E20C8E62753202B24B53EB375287C2C4C09B" : "PassApp-iOS\/",
+    "B5396C5D719C6F462C1C66CE2C4244D07A7F97A6" : "RxGcm-iOS\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "RxGcm_swift",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "iOS\/RxGcm_swift.xcworkspace",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/bemobile\/letmespace_ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "629E6ACB80F47D331A94DCC57D889C76F7F07528"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/FuckBoilerplate\/RxGcm-iOS.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",

@@ -10,7 +10,7 @@ import RxSwift
 
 class AppGcmReceiverUIBackground: NSObject, GcmReceiverUIBackground {
 
-    func onNotification(oMessage: Observable<RxMessage>) {
+    func onNotification(_ oMessage: Observable<RxMessage>) {
         
     }
 }

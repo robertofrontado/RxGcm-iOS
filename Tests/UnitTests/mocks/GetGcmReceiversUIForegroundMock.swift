@@ -10,7 +10,7 @@
 
 class GetGcmReceiversUIForegroundMock: GetGcmReceiversUIForeground {
 
-    override func retrieve(screenName: String) -> (gcmReceiverUIForeground: GcmReceiverUIForeground, targetScreen: Bool)? {
+    override func retrieve(_ screenName: String) -> (gcmReceiverUIForeground: GcmReceiverUIForeground, targetScreen: Bool)? {
         return (GcmReceiverUIForegroundMock(), false)
     }
 }

@@ -14,7 +14,7 @@ class GetGcmReceiversUIForegroundMockWithReceivers: GetGcmReceiversUIForeground 
     var testWithReceivers = true
     
     // Same implementation with little changes
-    override func retrieve(screenName: String) -> (gcmReceiverUIForeground: GcmReceiverUIForeground, targetScreen: Bool)? {
+    override func retrieve(_ screenName: String) -> (gcmReceiverUIForeground: GcmReceiverUIForeground, targetScreen: Bool)? {
         
         var receiverCandidate: (gcmReceiverUIForeground: GcmReceiverUIForeground, targetScreen: Bool)? = nil
         
@@ -42,7 +42,7 @@ class GetGcmReceiversUIForegroundMockWithReceivers: GetGcmReceiversUIForeground 
     }
     
     // MARK: - Private methods
-    private func getViewControllersReceivers() -> [UIViewController] {
+    fileprivate func getViewControllersReceivers() -> [UIViewController] {
         let viewControllersReceivers = [
             ViewControllerMockReceiver1(nibName: nil, bundle: nil),
             ViewControllerMockReceiver2(nibName: nil, bundle: nil)
@@ -50,7 +50,7 @@ class GetGcmReceiversUIForegroundMockWithReceivers: GetGcmReceiversUIForeground 
         return viewControllersReceivers
     }
     
-    private func getViewControllers() -> [UIViewController] {
+    fileprivate func getViewControllers() -> [UIViewController] {
         let viewControllers = [
             ViewControllerMock(nibName: nil, bundle: nil),
             ViewControllerMock(nibName: nil, bundle: nil)
@@ -62,7 +62,7 @@ class GetGcmReceiversUIForegroundMockWithReceivers: GetGcmReceiversUIForeground 
     
     class ViewControllerMockReceiver1: UIViewController, GcmReceiverUIForeground {
         
-        override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
             super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         }
         
@@ -70,22 +70,22 @@ class GetGcmReceiversUIForegroundMockWithReceivers: GetGcmReceiversUIForeground 
             fatalError("init(coder:) has not been implemented")
         }
         
-        func onTargetNotification(oMessage: Observable<RxMessage>) {
+        func onTargetNotification(_ oMessage: Observable<RxMessage>) {
             
         }
         
-        func onMismatchTargetNotification(oMessage: Observable<RxMessage>) {
+        func onMismatchTargetNotification(_ oMessage: Observable<RxMessage>) {
             
         }
         
-        func matchesTarget(key: String) -> Bool {
-            return String(ViewControllerMockReceiver1.self) == key
+        func matchesTarget(_ key: String) -> Bool {
+            return String(describing: ViewControllerMockReceiver1.self) == key
         }
     }
     
     class ViewControllerMockReceiver2: UIViewController, GcmReceiverUIForeground {
         
-        override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
             super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         }
         
@@ -93,22 +93,22 @@ class GetGcmReceiversUIForegroundMockWithReceivers: GetGcmReceiversUIForeground 
             fatalError("init(coder:) has not been implemented")
         }
         
-        func onTargetNotification(oMessage: Observable<RxMessage>) {
+        func onTargetNotification(_ oMessage: Observable<RxMessage>) {
             
         }
         
-        func onMismatchTargetNotification(oMessage: Observable<RxMessage>) {
+        func onMismatchTargetNotification(_ oMessage: Observable<RxMessage>) {
             
         }
         
-        func matchesTarget(key: String) -> Bool {
-            return String(ViewControllerMockReceiver2.self) == key
+        func matchesTarget(_ key: String) -> Bool {
+            return String(describing: ViewControllerMockReceiver2.self) == key
         }
     }
     
     class ViewControllerMock: UIViewController {
         
-        override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
             super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         }
         
